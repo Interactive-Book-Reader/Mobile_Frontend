@@ -35,7 +35,7 @@ const PROFILE_PICTURE =
 
 const BOOK_LIST_DATA = [
   {
-    imageUrl:
+ imageUrl:
       "https://cdn-ackhb.nitrocdn.com/YTibXMIwXCUkXtfHFnkSuEHUqRRKKBBW/assets/images/optimized/rev-1ca4f7f/wp-content/uploads/2022/09/The-Leaf-Thief.jpg",
     title: "The Leaf Thief",
     price: 200,
