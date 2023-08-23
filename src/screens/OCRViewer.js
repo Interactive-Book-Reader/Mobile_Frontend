@@ -3,7 +3,7 @@ import { SafeAreaView, StatusBar, Text, View } from "react-native";
 
 import { launchImageLibrary } from "react-native-image-picker";
 
-const OCRViewer = () => {
+const OCRViewer = ({navigation}) => {
   const { image, setImage } = useState(null);
 
   useEffect(() => {
@@ -25,3 +25,5 @@ const OCRViewer = () => {
     </SafeAreaView>
   );
 };
+
+exports default OCRViewer;
