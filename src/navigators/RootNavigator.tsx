@@ -6,8 +6,10 @@ import {
 } from "@react-navigation/native-stack";
 import DetailsScreen from "../screens/DetailsScreen";
 import TabsNavigator, { TabsStackParamList } from "./TabNavigator";
+import Login from "../screens/LoginScreen";
 
 export type RootStackParamList = {
+  Login: undefined;
   TabsStack: NavigatorScreenParams<TabsStackParamList>;
   Details: {
     id: string;
@@ -22,6 +24,14 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> =
 const RootNavigator = () => {
   return (
     <RootStack.Navigator>
+      <RootStack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          headerShown: false,
+        }}
+      />
+
       <RootStack.Screen
         name="TabsStack"
         component={TabsNavigator}
