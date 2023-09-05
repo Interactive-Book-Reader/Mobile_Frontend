@@ -7,9 +7,11 @@ import {
 import DetailsScreen from "../screens/DetailsScreen";
 import TabsNavigator, { TabsStackParamList } from "./TabNavigator";
 import Login from "../screens/LoginScreen";
+import Register from "../screens/RegisterScreen";
 
 export type RootStackParamList = {
   Login: undefined;
+  Register: undefined;
   TabsStack: NavigatorScreenParams<TabsStackParamList>;
   Details: {
     id: string;
@@ -27,6 +29,13 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Login"
         component={Login}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <RootStack.Screen
+        name="Register"
+        component={Register}
         options={{
           headerShown: false,
         }}
