@@ -8,6 +8,7 @@ import DetailsScreen from "../screens/DetailsScreen";
 import TabsNavigator, { TabsStackParamList } from "./TabNavigator";
 import Login from "../screens/LoginScreen";
 import Register from "../screens/RegisterScreen";
+import PdfScreen from "../screens/PdfScreen";
 
 export type RootStackParamList = {
   Login: undefined;
@@ -16,6 +17,7 @@ export type RootStackParamList = {
   Details: {
     id: string;
   };
+  Pdf: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -51,6 +53,13 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="Details"
         component={DetailsScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <RootStack.Screen
+        name="Pdf"
+        component={PdfScreen}
         options={{
           headerShown: false,
         }}

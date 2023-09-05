@@ -22,7 +22,6 @@ const DetailsScreen = ({
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const [count, setCount] = useState(1);
-  const [size, setSize] = useState(SIZES[0]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -192,6 +191,7 @@ const DetailsScreen = ({
               borderWidth: 1,
               borderColor: "#000",
             }}
+            onPress={() => navigation.navigate('PdfScreen')}
           >       
             <MaterialIcons name="menu-book" size={44} color="black" />
             </TouchableOpacity>   
