@@ -8,7 +8,7 @@ import {
   FlatList,
   Appearance,
 } from "react-native";
-import React, { useCallback, useRef, useState,useEffect } from "react";
+import React, { useCallback, useRef, useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@react-navigation/native";
 import Icons from "@expo/vector-icons/MaterialIcons";
@@ -32,9 +32,6 @@ const BOOK_CATEGORIES = [
 const PROFILE_PICTURE =
   "https://c0.wallpaperflare.com/preview/1015/464/838/adorable-beautiful-boy-child.jpg";
 
-
-
-
 const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
   Appearance.addChangeListener((scheme) => {
     console.log(scheme.colorScheme);
@@ -50,23 +47,25 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
 
   const fetchFreeBooks = async () => {
     try {
-      const response = await fetch("http://192.168.8.122:3001/api/book/pricebook", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          starting_Price: 0,
-          ending_Price: 10000,
-        }),
-      });
+      const response = await fetch(
+        "http://192.168.8.122:3001/api/book/pricebook",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            starting_Price: 0,
+            ending_Price: 10000,
+          }),
+        }
+      );
       const responseData = await response.json();
       setBOOK_LIST_DATA(responseData.response);
     } catch (error) {
       console.error("Error:", error);
     }
   };
-
 
   useEffect(() => {
     fetchFreeBooks();
@@ -290,104 +289,108 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
                 navigation.navigate("Details", {
                   id: item._id,
                 });
-              }} 
-          >
-            <View style={{ padding: 6 }}>
-              <View
-                style={{
-                  aspectRatio: i === 0 ? 1 : 2 / 3,
-                  position: "relative",
-                  overflow: "hidden",
-                  borderRadius: 24,
-                }}
-              >
-                <Image
-                  source={{
-                    uri: item.coverpage,
-                  }}
-                  resizeMode="cover"
-                  style={StyleSheet.absoluteFill}
-                />
+              }}
+            >
+              <View style={{ padding: 6 }}>
                 <View
-                  style={[
-                    StyleSheet.absoluteFill,
-                    {
-                      padding: 12,
-                    },
-                  ]}
+                  style={{
+                    aspectRatio: i === 0 ? 1 : 2 / 3,
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: 24,
+                  }}
                 >
-                  <View style={{ flexDirection: "row", gap: 8, padding: 4 }}>
-                    <Text
-                      style={{
-                        flex: 1,
-                        fontSize: 16,
-                        fontWeight: "900",
-                        color: "#000",
-                        textShadowColor: "rgba(0,0,0,0.2)",
-                        textShadowOffset: {
-                          height: 1,
-                          width: 0,
-                        },
-                        textShadowRadius: 4,
-                      }}
-                    >
-                      {item.title}
-                    </Text>
-                    <View
-                      style={{
-                        backgroundColor: colors.card,
-                        borderRadius: 100,
-                        height: 32,
-                        aspectRatio: 1,
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Icons
-                        name="favorite-border"
-                        size={20}
-                        color={colors.text}
-                      />
-                    </View>
-                  </View>
-                  <View style={{ flex: 1 }} />
-                  <BlurView
-                    style={{
-                      flexDirection: "row",
-                      backgroundColor: "rgba(0,0,0,0.5)",
-                      alignItems: "center",
-                      padding: 6,
-                      borderRadius: 100,
-                      overflow: "hidden",
+                  <Image
+                    source={{
+                      uri: item.coverpage,
                     }}
-                    intensity={20}
+                    resizeMode="cover"
+                    style={StyleSheet.absoluteFill}
+                  />
+                  <View
+                    style={[
+                      StyleSheet.absoluteFill,
+                      {
+                        padding: 12,
+                      },
+                    ]}
                   >
-                    <Text
+                    <View style={{ flexDirection: "row", gap: 8, padding: 4 }}>
+                      <Text
+                        style={{
+                          flex: 1,
+                          fontSize: 16,
+                          fontWeight: "900",
+                          color: "#000",
+                          textShadowColor: "rgba(0,0,0,0.2)",
+                          textShadowOffset: {
+                            height: 1,
+                            width: 0,
+                          },
+                          textShadowRadius: 4,
+                        }}
+                      >
+                        {item.title}
+                      </Text>
+                      <View
+                        style={{
+                          backgroundColor: colors.card,
+                          borderRadius: 100,
+                          height: 32,
+                          aspectRatio: 1,
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Icons
+                          name="favorite-border"
+                          size={20}
+                          color={colors.text}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flex: 1 }} />
+                    <BlurView
                       style={{
-                        flex: 1,
-                        fontSize: 16,
-                        fontWeight: "600",
-                        color: "#fff",
-                        marginLeft: 8,
-                      }}
-                      numberOfLines={1}
-                    >
-                      Rs.{item.price}
-                    </Text>
-                    <TouchableOpacity
-                      style={{
-                        paddingHorizontal: 12,
-                        paddingVertical: 8,
+                        flexDirection: "row",
+                        backgroundColor: "rgba(0,0,0,0.5)",
+                        alignItems: "center",
+                        padding: 6,
                         borderRadius: 100,
-                        backgroundColor: "#fff",
+                        overflow: "hidden",
                       }}
+                      intensity={20}
                     >
-                      <Icons name="add-shopping-cart" size={18} color="#000" />
-                    </TouchableOpacity>
-                  </BlurView>
+                      <Text
+                        style={{
+                          flex: 1,
+                          fontSize: 16,
+                          fontWeight: "600",
+                          color: "#fff",
+                          marginLeft: 8,
+                        }}
+                        numberOfLines={1}
+                      >
+                        Rs.{item.price}
+                      </Text>
+                      <TouchableOpacity
+                        style={{
+                          paddingHorizontal: 12,
+                          paddingVertical: 8,
+                          borderRadius: 100,
+                          backgroundColor: "#fff",
+                        }}
+                      >
+                        <Icons
+                          name="add-shopping-cart"
+                          size={18}
+                          color="#000"
+                        />
+                      </TouchableOpacity>
+                    </BlurView>
+                  </View>
                 </View>
               </View>
-            </View>
             </TouchableOpacity>
           )}
           onEndReachedThreshold={0.1}
