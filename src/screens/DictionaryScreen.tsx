@@ -12,10 +12,14 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 import { TabsStackScreenProps } from "../navigators/TabNavigator";
 import Colors from "../constants/Colors";
+import Tts from "react-native-tts";
+
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
-const DictionaryScreen = ({ navigation }: TabsStackScreenProps<"Cart">) => {
+const DictionaryScreen = ({
+  navigation,
+}: TabsStackScreenProps<"Dictionary">) => {
   const [newWord, setNewWord] = useState("");
   const [checkedWord, setCheckedWord] = useState("");
   const [definition, setDefinition] = useState("");
@@ -26,15 +30,15 @@ const DictionaryScreen = ({ navigation }: TabsStackScreenProps<"Cart">) => {
   };
 
   const getInfo = async () => {
-    var url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + newWord;
+    let url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + newWord;
 
     const data = await fetch(url);
     const response = await data.json();
-    var word = response[0].word;
+    let word = response[0].word;
     setCheckedWord(word);
-    var def = response[0].meanings[0].definitions[0].definition;
+    let def = response[0].meanings[0].definitions[0].definition;
     setDefinition(def);
-    var eg = response[0].meanings[0].definitions[0].example;
+    let eg = response[0].meanings[0].definitions[0].example;
     setExample(eg);
   };
 
@@ -44,23 +48,27 @@ const DictionaryScreen = ({ navigation }: TabsStackScreenProps<"Cart">) => {
     setExample("");
     setNewWord("");
   };
+
+  // Function to speak a word or text
+
   return (
-    
     <View style={styles.container}>
       <ImageBackground
         source={require("../../assets/603.jpg")}
         resizeMode="cover"
         style={{ flex: 1 }}
-      >        
+      >
         <View style={{ flex: 1 }}>
           <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <Text style={{
+            <Text
+              style={{
                 fontSize: 30,
                 fontFamily: "sans-serif",
                 fontVariant: ["small-caps"],
                 fontWeight: "bold",
-            }}>
-                Dictionary
+              }}
+            >
+              Dictionary
             </Text>
             <TextInput
               style={styles.inputBox}
@@ -87,7 +95,7 @@ const DictionaryScreen = ({ navigation }: TabsStackScreenProps<"Cart">) => {
                   getInfo();
                 }}
               >
-                <Text style={styles.buttonText}>Go !</Text>
+                <Text style={styles.buttonText}>Go</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.buttonDesign}
